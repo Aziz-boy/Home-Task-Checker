@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Dashboard</title>
+  <link rel="stylesheet" href="/styles.css"> <!-- Add your styles if needed -->
+</head>
+<body>
+  <div class="container">
+    <h1>Review Student Submissions</h1>
+    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+      <thead>
+        <tr style="background-color: #f4f4f4;">
+          <th style="padding: 10px; border: 1px solid #ddd;">Student Name</th>
+          <th style="padding: 10px; border: 1px solid #ddd;">CodePen Link</th>
+          <th style="padding: 10px; border: 1px solid #ddd;">Status</th>
+          <th style="padding: 10px; border: 1px solid #ddd;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% submissions.forEach(submission => { %>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #ddd;"><%= submission.studentName %></td>
+            <td style="padding: 10px; border: 1px solid #ddd;">
+              <a href="<%= submission.codepenLink %>" target="_blank" style="color: #007BFF; text-decoration: none;">View CodePen</a>
+            </td>
+            <td style="padding: 10px; border: 1px solid #ddd;">
+              <% if (submission.status === 'pass') { %>
+                <span style="color: green; font-weight: bold;">✅ Passed</span>
+              <% } else if (submission.status === 'fail') { %>
+                <span style="color: red; font-weight: bold;">❌ Failed</span>
+              <% } else { %>
+                <span style="color: orange; font-weight: bold;">⏳ Loading...</span>
+              <% } %>
+            </td>
+            <td style="padding: 10px; border: 1px solid #ddd;">
+              <!-- Buttons to update the status -->
+              <a 
+                href="/api/submissions/update/submission/<%= submission._id %>?status=pass" 
+                style="color: white; background-color: green; padding: 5px 10px; text-decoration: none; border-radius: 4px; margin-right: 5px;">Approve</a>
+              <a 
+                href="/api/submissions/update/submission/<%= submission._id %>?status=fail" 
+                style="color: white; background-color: red; padding: 5px 10px; text-decoration: none; border-radius: 4px; margin-right: 5px;">Reject</a>
+              <a 
+                href="/api/submissions/update/submission/<%= submission._id %>?status=loading" 
+                style="color: white; background-color: orange; padding: 5px 10px; text-decoration: none; border-radius: 4px;">Resubmit</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>    
+  </div>
+</body>
+</html>

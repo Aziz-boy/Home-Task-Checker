@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "target": "ES2020",                // Use modern JavaScript features
+      "module": "CommonJS",              // Use CommonJS to be compatible with Node.js 16
+      "outDir": "./dist",                // Compiled JS files will go here
+      "strict": true,                    // Enable strict type-checking
+      "esModuleInterop": true,           // Allow importing ES modules
+      "skipLibCheck": true,              // Skip checking library files
+      "forceConsistentCasingInFileNames": true,
+      "baseUrl": "./",                   // Resolve modules from the root
+      "paths": {}                        // Optional: for custom paths if needed
+    },
+    "include": ["**/*.ts"],              // Include all .ts files
+    "exclude": ["node_modules"]          // Exclude node_modules
+  }
+  
